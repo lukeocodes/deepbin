@@ -2,6 +2,8 @@
 
 An app that will act as a proxy to your Deepgram requests, store the results, the file, and allow you to replay the requests.
 
+![Screenshot](./screenshot.png)
+
 ## Getting Started
 
 First, run the development server:
