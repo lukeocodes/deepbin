@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deepbin
+
+An app that will act as a proxy to your Deepgram requests, store the results, the file, and allow you to replay the requests.
 
 ## Getting Started
 
