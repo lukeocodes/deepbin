@@ -3,7 +3,7 @@ type LoginLayout = {
 };
 
 const LoginLayout = ({ children }: LoginLayout) => {
-  return <main className="w-full h-full">{children}</main>;
+  return <div className="w-full h-full bg-black">{children}</div>;
 };
 
 export default LoginLayout;
