@@ -8,12 +8,12 @@ const samples: { [key: string]: string } = {
   javascript: `// pre-recorded.js
 const fetch = require('node-fetch');
 
-const url = 'https://deepbin.dev/api/proxy/v1/listen?model=nova';
+const url = 'https://deepbin.dev/api/proxy/v1/listen';
 const options = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'Token mkmerg'
+    'Authorization': 'Token <token>'
   },
   body: JSON.stringify({
     url: 'https://dpgr.am/spacewalk.wav'
@@ -24,25 +24,21 @@ fetch(url, options)
   .then(res => res.json())
   .then(json => console.log(json))
   .catch(err => console.error('error:' + err));`,
-  python: `// pre-recorded.py
-const fetch = require('node-fetch');
+  python: `# pre-recorded.py
+import requests
 
-const url = 'https://deepbin.dev/api/proxy/v1/listen?model=nova';
-const options = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Token mkmerg'
-  },
-  body: JSON.stringify({
-    url: 'https://dpgr.am/spacewalk.wav'
-  })
-};
+url = "https://deepbin.dev/api/proxy/v1/listen"
 
-fetch(url, options)
-  .then(res => res.json())
-  .then(json => console.log(json))
-  .catch(err => console.error('error:' + err));`,
+payload = {"url": "https://dpgr.am/spacewalk.wav"}
+headers = {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "Authorization": "Token <token>"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.text)`,
 };
 
 const Stats = () => {
@@ -90,6 +86,7 @@ const Home: NextPage = () => {
       documented for <code>api.deepgram.com</code> through to
       <code>deepbin.dev/api/proxy</code>.<h3>Send a file for transcription</h3>
       <CodeBlock language="bash">npm install node-fetch@2</CodeBlock>
+      <CodeTabs samples={samples} />
       <CodeTabs samples={samples} />
       <CodeTabs samples={samples} />
     </AppLayout>

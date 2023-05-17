@@ -1,7 +1,7 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import customStyle from "@/styles/syntax-highlighter.customStyle";
-import React, { ReactNode } from "react";
+import React from "react";
 
 interface CodeBlockInterface {
   language: string;

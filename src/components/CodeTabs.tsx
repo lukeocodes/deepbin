@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import classNames from "@/util/classNames";
-import { useLanguageContext } from "@/pages/_app";
+import { useLanguageContext } from "@/components/context/language";
 import CodeBlock from "@/components/CodeBlock";
 
 const CodeTabs = ({ samples }: { samples: { [key: string]: string } }) => {
