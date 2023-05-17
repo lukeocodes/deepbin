@@ -33,3 +33,24 @@ body {
   content: "\2026";
   width: 1em;
 }
+
+.prose a:hover {
+  @apply no-underline;
+}
+
+.prose a.onboarding-cta {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 border bg-zinc-900 border-zinc-600 py-[0.3em] px-[1em] rounded-md shrink-0;
+}
+
+.prose a.onboarding-cta:hover {
+  @apply bg-white text-black bg-clip-border border-black;
+}
+
+.prose a.special-cta,
+.prose a.special-cta:focus {
+  @apply rounded-md bg-white text-black px-8 py-3 text-sm no-underline;
+}
+
+.prose a.special-cta:hover {
+  @apply bg-gradient-to-r from-red-400 to-orange-400;
+}

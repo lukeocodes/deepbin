@@ -78,7 +78,7 @@ const Home: NextPage = () => {
               >
                 <Dialog.Panel className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 sm:mx-auto sm:w-full sm:max-w-md">
                   <div className="rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[0.125rem]">
-                    <div className="bg-black p-8 rounded min-h-[12rem] flex flex-col justify-center">
+                    <div className="bg-zinc-950 p-8 rounded min-h-[12rem] flex flex-col justify-center">
                       {session ? (
                         <>
                           <BeakerIcon className="h-20 w-20 stroke-red-500 animate-spin mb-4 self-center" />

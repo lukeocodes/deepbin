@@ -10,7 +10,6 @@ const MiniProfile = () => {
   const user = useUser();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState<Profiles["username"]>(null);
-  const [website, setWebsite] = useState<Profiles["website"]>(null);
   const [avatar_url, setAvatarUrl] = useState<Profiles["avatar_url"]>(null);
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const MiniProfile = () => {
 
         let { data, error, status } = await supabase
           .from("profiles")
-          .select(`username, website, avatar_url`)
+          .select(`username, avatar_url`)
           .eq("id", user.id)
           .single();
 
@@ -31,7 +30,6 @@ const MiniProfile = () => {
 
         if (data) {
           setUsername(data.username);
-          setWebsite(data.website);
           setAvatarUrl(data.avatar_url);
         }
       } catch (error) {
@@ -44,7 +42,7 @@ const MiniProfile = () => {
     getProfile();
   }, [user, supabase]);
 
-  if (!user) {
+  if (!user || loading) {
     return (
       <span className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white">
         Loading...
@@ -55,11 +53,11 @@ const MiniProfile = () => {
   return (
     <a
       href="#"
-      className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
+      className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-zinc-800"
     >
       <AvatarImg uid={user!.id} url={avatar_url} size={32} />
       <span className="sr-only">Your profile</span>
-      <span aria-hidden="true">{username}</span>
+      <span aria-hidden="true">{username || user.email}</span>
     </a>
   );
 };

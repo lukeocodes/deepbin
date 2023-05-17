@@ -9,7 +9,7 @@ const BreadcrumbHome = ({ page }: { page: NavigationPage }) => {
       <div className="flex items-center">
         <Link
           href={page.href}
-          className="text-gray-400 hover:text-gray-500"
+          className="text-zinc-400 hover:text-zinc-500"
           aria-current={page.current ? "page" : undefined}
         >
           <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
@@ -22,12 +22,12 @@ const BreadcrumbHome = ({ page }: { page: NavigationPage }) => {
 
 const Breadcrumb = ({ page }: { page: NavigationPage }) => {
   return (
-    <li key={page.name} className="flex min-h-[3em]">
+    <li className="flex min-h-[3em]">
       <div className="flex items-center">
-        <ChevronDoubleRightIcon className="stroke-gray-500 w-5 h-5" />
+        <ChevronDoubleRightIcon className="stroke-zinc-500 w-5 h-5" />
         <Link
           href={page.href}
-          className="ml-4 text-sm text-gray-200 hover:text-gray-300"
+          className="ml-4 text-sm text-zinc-200 hover:text-zinc-300"
           aria-current={page.current ? "page" : undefined}
         >
           {page.name}
@@ -46,7 +46,7 @@ const BreadcrumbNav = ({
 }) => {
   return (
     <nav
-      className="flex border-b border-gray-700  bg-gray-800"
+      className="flex border-b border-zinc-700  bg-zinc-800/80"
       aria-label="Breadcrumb"
     >
       <ol
