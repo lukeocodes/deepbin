@@ -7,7 +7,6 @@ const CodeTabs = ({ samples }: { samples: { [key: string]: string } }) => {
   const { language, setLanguage } = useLanguageContext();
   const sampleKeys = Object.keys(samples);
 
-  // console.log(sampleKeys, language);
   const sampleIndex = sampleKeys.findIndex((key) => {
     return key === language;
   });

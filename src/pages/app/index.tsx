@@ -1,45 +1,10 @@
 import AppLayout from "@/components/layouts/AppLayout";
 import CodeTabs from "@/components/CodeTabs";
 import CodeBlock from "@/components/CodeBlock";
+import PageSubtitle from "@/components/PageSubtitle";
+import useSWR from "swr";
 
 import type { NextPage } from "next";
-
-const samples: { [key: string]: string } = {
-  javascript: `// pre-recorded.js
-const fetch = require('node-fetch');
-
-const url = 'https://deepbin.dev/api/proxy/v1/listen';
-const options = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Token <token>'
-  },
-  body: JSON.stringify({
-    url: 'https://dpgr.am/spacewalk.wav'
-  })
-};
-
-fetch(url, options)
-  .then(res => res.json())
-  .then(json => console.log(json))
-  .catch(err => console.error('error:' + err));`,
-  python: `# pre-recorded.py
-import requests
-
-url = "https://deepbin.dev/api/proxy/v1/listen"
-
-payload = {"url": "https://dpgr.am/spacewalk.wav"}
-headers = {
-    "accept": "application/json",
-    "content-type": "application/json",
-    "Authorization": "Token <token>"
-}
-
-response = requests.post(url, json=payload, headers=headers)
-
-print(response.text)`,
-};
 
 const Stats = () => {
   const stats = [
@@ -73,11 +38,32 @@ const Stats = () => {
   );
 };
 
+const fetcher = (body: string) =>
+  fetch("/api/samples", { method: "POST", body: JSON.stringify(body) }).then(
+    (res) => {
+      console.log(res);
+      return res.json();
+    }
+  );
+
 const Home: NextPage = () => {
+  const curl = `curl --request POST \\
+     --url https://deepbin.dev/api/proxy/v1/listen  \\
+     --header 'Authorization: Token <token>'  \\
+     --header 'content-type: application/json'  \\
+     --data '{ "url": "https://dpgr.am/spacewalk.wav" }'`;
+
+  const { data, error }: { data?: any; error?: any } = useSWR(curl, fetcher);
+
+  const samples: { [key: string]: string } = {
+    curl,
+    ...(data ? data : {}),
+  };
+
   return (
     <AppLayout>
       <Stats />
-      <h2>Getting started</h2>
+      <PageSubtitle text="Getting started" />
       You can send pre-recorded{" "}
       <abbr title="Written text which is the result of converting speech from an audio file into text">
         transcription
@@ -85,9 +71,6 @@ const Home: NextPage = () => {
       requests straight to Deepbin. You can make almost all API requests
       documented for <code>api.deepgram.com</code> through to
       <code>deepbin.dev/api/proxy</code>.<h3>Send a file for transcription</h3>
-      <CodeBlock language="bash">npm install node-fetch@2</CodeBlock>
-      <CodeTabs samples={samples} />
-      <CodeTabs samples={samples} />
       <CodeTabs samples={samples} />
     </AppLayout>
   );
