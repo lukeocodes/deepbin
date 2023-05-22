@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import "nprogress/nprogress.css";
 
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { ErrorsContextProvider } from "@/components/context/errors";
 import { Inter } from "next/font/google";
 import { LanguageContextProvider } from "@/components/context/language";
 import { ProjectContextProvider } from "@/components/context/project";
@@ -32,21 +33,23 @@ const Deepbin = ({
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
   return (
-    <SessionContextProvider
-      supabaseClient={supabaseClient}
-      initialSession={pageProps.initialSession}
-    >
-      <ProjectContextProvider>
-        <LanguageContextProvider>
-          <style jsx global>{`
-            html {
-              font-family: ${inter.style.fontFamily};
-            }
-          `}</style>
-          <Component {...pageProps} />
-        </LanguageContextProvider>
-      </ProjectContextProvider>
-    </SessionContextProvider>
+    <ErrorsContextProvider>
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}
+      >
+        <ProjectContextProvider>
+          <LanguageContextProvider>
+            <style jsx global>{`
+              html {
+                font-family: ${inter.style.fontFamily};
+              }
+            `}</style>
+            <Component {...pageProps} />
+          </LanguageContextProvider>
+        </ProjectContextProvider>
+      </SessionContextProvider>
+    </ErrorsContextProvider>
   );
 };
 
