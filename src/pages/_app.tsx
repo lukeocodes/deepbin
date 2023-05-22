@@ -1,15 +1,27 @@
 import "@/styles/globals.css";
+import "nprogress/nprogress.css";
 
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { Inter } from "next/font/google";
-import { useState } from "react";
 import { LanguageContextProvider } from "@/components/context/language";
 import { ProjectContextProvider } from "@/components/context/project";
+import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
+import { useState } from "react";
+import NProgress from "nprogress";
+import Router from "next/router";
 
 import type { AppProps } from "next/app";
 
-const inter = Inter({ subsets: ["latin"] });
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeError", () => () => NProgress.done());
+
+const inter = Inter({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal"],
+  display: "swap",
+  subsets: ["latin"],
+});
 
 const Deepbin = ({
   Component,

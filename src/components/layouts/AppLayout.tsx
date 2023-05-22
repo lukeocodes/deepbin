@@ -13,13 +13,12 @@ import { Bars3Icon } from "@heroicons/react/20/solid";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
-import Onboarding from "@/components/Onboarding";
 import classNames from "@/util/classNames";
+import Link from "next/link";
+import MainNav from "@/components/MainNav";
 
 import type { Navigation, NavigationPage } from "@/types/navigation";
-import MainNav from "../MainNav";
 
 type AppLayout = {
   children: React.ReactNode;
@@ -275,12 +274,7 @@ const AppLayout = ({ children }: AppLayout) => {
 
           <BreadcrumbNav pages={breadcrumbs()} home={home} />
 
-          {/* <Onboarding /> */}
-
-          <main className="p-8 max-w-none prose dark:prose-invert">
-            <h1>{current().name}</h1>
-            {children}
-          </main>
+          {children}
 
           <div className="xl:hidden absolute left-5 top-0 w-16 justify-center pt-5">
             <button

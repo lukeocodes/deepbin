@@ -4,7 +4,7 @@ const customStyle = {
   borderWidth: "1px",
   borderColor: "rgb(63 63 70 / 1)",
   borderStyle: "solid",
-  marginTop: "0",
+  margin: "0",
   padding: "1rem",
 };
 

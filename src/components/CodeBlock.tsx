@@ -10,7 +10,7 @@ interface CodeBlockInterface {
 }
 
 const CodeBlock = ({ language, children }: CodeBlockInterface) => {
-  const { project, setProject } = useProjectContext();
+  const { project } = useProjectContext();
 
   let sample: string = "";
 
@@ -28,7 +28,7 @@ const CodeBlock = ({ language, children }: CodeBlockInterface) => {
 
   const masker = (x: any) => (
     <span className="blur-sm hover:blur-none transition-all">
-      {x.replace(/<token>/g, project)}
+      {x.replace(/<token>/g, project?.api_key)}
     </span>
   );
 

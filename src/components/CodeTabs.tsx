@@ -2,6 +2,7 @@ import { Tab } from "@headlessui/react";
 import classNames from "@/util/classNames";
 import { useLanguageContext } from "@/components/context/language";
 import CodeBlock from "@/components/CodeBlock";
+import CopyButton from "@/components/CopyButton";
 
 const CodeTabs = ({ samples }: { samples: { [key: string]: string } }) => {
   const { language, setLanguage } = useLanguageContext();
@@ -39,8 +40,9 @@ const CodeTabs = ({ samples }: { samples: { [key: string]: string } }) => {
       </Tab.List>
       <Tab.Panels>
         {Object.values(samples).map((sample, idx) => (
-          <Tab.Panel key={idx} className={classNames("")}>
+          <Tab.Panel key={idx}>
             <CodeBlock language={Object.keys(samples)[idx]}>{sample}</CodeBlock>
+            <CopyButton code={sample} />
           </Tab.Panel>
         ))}
       </Tab.Panels>

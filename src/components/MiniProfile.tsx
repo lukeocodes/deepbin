@@ -18,22 +18,18 @@ const MiniProfile = () => {
         setLoading(true);
         if (!user) return;
 
-        let { data, error, status } = await supabase
+        let { data, error } = await supabase
           .from("profiles")
           .select(`username, avatar_url`)
           .eq("id", user.id)
           .single();
 
-        if (error && status !== 406) {
-          throw error;
-        }
+        if (error) throw error;
 
         if (data) {
           setUsername(data.username);
           setAvatarUrl(data.avatar_url);
         }
-      } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }

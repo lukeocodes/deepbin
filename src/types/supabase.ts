@@ -41,24 +41,30 @@ export interface Database {
       projects: {
         Row: {
           api_key: string
+          credit: number
           id: number
-          name: string | null
+          name: string
           project_id: string
-          user_id: string | null
+          type: string
+          user_id: string
         }
         Insert: {
           api_key: string
+          credit?: number
           id?: number
-          name?: string | null
+          name: string
           project_id: string
-          user_id?: string | null
+          type?: string
+          user_id: string
         }
         Update: {
           api_key?: string
+          credit?: number
           id?: number
-          name?: string | null
+          name?: string
           project_id?: string
-          user_id?: string | null
+          type?: string
+          user_id?: string
         }
       }
     }

@@ -5,6 +5,7 @@ import PageSubtitle from "@/components/PageSubtitle";
 import useSWR from "swr";
 
 import type { NextPage } from "next";
+import PageTitle from "@/components/PageTitle";
 
 const Stats = () => {
   const stats = [
@@ -41,7 +42,6 @@ const Stats = () => {
 const fetcher = (body: string) =>
   fetch("/api/samples", { method: "POST", body: JSON.stringify(body) }).then(
     (res) => {
-      console.log(res);
       return res.json();
     }
   );
@@ -56,22 +56,27 @@ const Home: NextPage = () => {
   const { data, error }: { data?: any; error?: any } = useSWR(curl, fetcher);
 
   const samples: { [key: string]: string } = {
-    curl,
+    bash: curl,
     ...(data ? data : {}),
   };
 
   return (
     <AppLayout>
-      <Stats />
-      <PageSubtitle text="Getting started" />
-      You can send pre-recorded{" "}
-      <abbr title="Written text which is the result of converting speech from an audio file into text">
-        transcription
-      </abbr>{" "}
-      requests straight to Deepbin. You can make almost all API requests
-      documented for <code>api.deepgram.com</code> through to
-      <code>deepbin.dev/api/proxy</code>.<h3>Send a file for transcription</h3>
-      <CodeTabs samples={samples} />
+      <PageTitle text="Dashboard" />
+
+      <main className="p-8 max-w-none prose dark:prose-invert">
+        <Stats />
+        <PageSubtitle text="Getting started" />
+        You can send pre-recorded{" "}
+        <abbr title="Written text which is the result of converting speech from an audio file into text">
+          transcription
+        </abbr>{" "}
+        requests straight to Deepbin. You can make almost all API requests
+        documented for <code>api.deepgram.com</code> through to
+        <code>deepbin.dev/api/proxy</code>.
+        <h3>Send a file for transcription</h3>
+        <CodeTabs samples={samples} />
+      </main>
     </AppLayout>
   );
 };

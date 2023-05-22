@@ -12,8 +12,8 @@ export default async function handler(
   return res.status(200).json({
     python: curlconverter.toPython(curl),
     node: curlconverter.toNodeFetch(curl),
+    dotnet: curlconverter.toCSharp(curl),
     go: curlconverter.toGo(curl),
     ruby: curlconverter.toRuby(curl),
-    dotnet: curlconverter.toCSharp(curl),
   });
 }
