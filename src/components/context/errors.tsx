@@ -21,6 +21,7 @@ const ErrorsContextProvider = ({ children }: ErrorsContextInterface) => {
   const errors = new EventEmitter();
 
   const add = (error: string) => {
+    console.log(error);
     queue.push(error);
     errors.emit("added", error);
   };

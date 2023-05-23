@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { useErrorsContext } from "@/components/context/errors";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import AppLayout from "@/components/layouts/AppLayout";
 import PageTitle from "@/components/PageTitle";
@@ -8,6 +9,7 @@ import ProjectGrid from "@/components/projects/ProjectGrid";
 import type { NextPage } from "next";
 
 const Projects: NextPage = () => {
+  const { add } = useErrorsContext();
   const [open, setOpen] = useState(false);
 
   const AddProject = () => {
@@ -67,6 +69,13 @@ const Projects: NextPage = () => {
   return (
     <AppLayout>
       <PageTitle text="Projects">
+        <button
+          onClick={() => {
+            add("Test error");
+          }}
+        >
+          Test error
+        </button>
         <button
           onClick={() => {
             setOpen(true);
