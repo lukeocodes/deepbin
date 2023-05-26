@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Database } from "@/types/supabase";
+import { useErrorsContext } from "@/components/context/errors";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import React, { useEffect, useState } from "react";
+
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
 export default function Avatar({
@@ -12,6 +14,7 @@ export default function Avatar({
   url: Profiles["avatar_url"];
   size: number;
 }) {
+  const { add: addError } = useErrorsContext();
   const supabase = useSupabaseClient<Database>();
   const [avatarUrl, setAvatarUrl] = useState<Profiles["avatar_url"]>(null);
   const [blobUrlCache, setBlobUrlCache] = useState<Record<string, string>>({});
@@ -27,6 +30,7 @@ export default function Avatar({
         const { data, error } = await supabase.storage
           .from("avatars")
           .download(path);
+
         if (error) {
           throw error;
         }
@@ -34,8 +38,8 @@ export default function Avatar({
         const url = URL.createObjectURL(data);
         setAvatarUrl(url);
         setBlobUrlCache((prevCache) => ({ ...prevCache, [path]: url }));
-      } catch (error) {
-        console.log("Error downloading image: ", error);
+      } catch (err: unknown) {
+        if (err instanceof Error) addError(err.message);
       }
     }
 

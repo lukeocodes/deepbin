@@ -1,11 +1,13 @@
+import { Database } from "@/types/supabase";
+import { useErrorsContext } from "@/components/context/errors";
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-
-import { Database } from "@/types/supabase";
 import AvatarImg from "@/components/AvatarImg";
+
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
 const MiniProfile = () => {
+  const { add: addError } = useErrorsContext();
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
   const [loading, setLoading] = useState(true);
@@ -30,6 +32,8 @@ const MiniProfile = () => {
           setUsername(data.username);
           setAvatarUrl(data.avatar_url);
         }
+      } catch (err: unknown) {
+        if (err instanceof Error) addError(err.message);
       } finally {
         setLoading(false);
       }

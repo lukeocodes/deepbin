@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useProjectContext } from "@/components/context/project";
 import ProjectCard from "@/components/projects/ProjectCard";
 
-const AddProject = (setOpen: any) => {
+const AddProject = ({ setOpen }: { setOpen: any }) => {
   return (
     <button
       type="button"

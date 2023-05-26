@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import "nprogress/nprogress.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { ErrorsContextProvider } from "@/components/context/errors";

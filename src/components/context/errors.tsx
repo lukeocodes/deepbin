@@ -21,7 +21,6 @@ const ErrorsContextProvider = ({ children }: ErrorsContextInterface) => {
   const errors = new EventEmitter();
 
   const add = (error: string) => {
-    console.log(error);
     queue.push(error);
     errors.emit("added", error);
   };
@@ -29,7 +28,8 @@ const ErrorsContextProvider = ({ children }: ErrorsContextInterface) => {
   const shift = () => {
     let error = queue.shift();
 
-    // only emit event if there was something in the queue otherwise return the result of Array.shift() which is undefined
+    // only emit event if there was something in the queue otherwise return the
+    // result of Array.shift() which is undefined
     if (error) errors.emit("removed", error);
 
     return error;
